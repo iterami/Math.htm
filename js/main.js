@@ -9,6 +9,9 @@ function repo_init(){
         'calculate': {
           'onclick': calculate,
         },
+        'calculate-interest': {
+          'onclick': calculate_interest,
+        },
         'height': {
           'oninput': calculate_width,
         },
@@ -40,6 +43,11 @@ function repo_init(){
       },
       'storage': {
         'calculator': '',
+        'compound': false,
+        'decimals-min': 2,
+        'interest': 0,
+        'principal': 0,
+        'time': 0,
       },
       'title': 'Math.htm',
     });
