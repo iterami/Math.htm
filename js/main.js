@@ -12,6 +12,9 @@ function repo_init(){
         'calculate-interest': {
           'onclick': calculate_interest,
         },
+        'calculate-percent': {
+          'onclick': calculate_percent,
+        },
         'height': {
           'oninput': calculate_width,
         },
@@ -47,6 +50,10 @@ function repo_init(){
         'decimals-min': 2,
         'interest': 0,
         'principal': 0,
+        'step-interval': 1,
+        'step-limit': 100,
+        'step-max': 10,
+        'step-start': 0,
         'time': 0,
       },
       'title': 'Math.htm',
