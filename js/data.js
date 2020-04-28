@@ -1,19 +1,5 @@
 'use strict';
 
-function add_result(){
-    const element = document.getElementById('calculator');
-    element.value =
-      element.value.substring(
-        0,
-        element.selectionStart
-      ) + document.getElementById('result').textContent
-      + element.value.substring(
-        element.selectionStart
-      );
-
-    core_storage_save();
-}
-
 function calculate(){
     core_storage_save();
 
