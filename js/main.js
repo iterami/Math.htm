@@ -12,12 +12,21 @@ function repo_init(){
         'calculate-percent': {
           'onclick': calculate_percent,
         },
+        'clear': {
+          'onclick': function(){
+              const calculator = document.getElementById('calculator');
+              calculator.value = '';
+              calculator.focus();
+          },
+        },
         'height': {
           'oninput': calculate_width,
         },
         'pi': {
           'onclick': function(){
-              document.getElementById('calculator').value += 'π';
+              const calculator = document.getElementById('calculator');
+              calculator.value += 'π';
+              calculator.focus();
           },
         },
         'ratio-height': {
