@@ -1,7 +1,11 @@
 'use strict';
 
 function calculate(){
-    core_storage_save();
+    core_storage_save({
+      'keys': [
+        'calculator',
+      ],
+    });
 
     let to_calculate = document.getElementById('calculator').value.replace(
       /\s/g,
@@ -52,7 +56,15 @@ function calculate_height(){
 }
 
 function calculate_interest(){
-    core_storage_save();
+    core_storage_save({
+      'keys': [
+        'compound',
+        'decimals-min',
+        'interest',
+        'principal',
+        'time',
+      ],
+    });
 
     let loop_counter = core_storage_data['time'] - 1;
     let result = 0;
@@ -80,7 +92,14 @@ function calculate_interest(){
 }
 
 function calculate_percent(){
-    core_storage_save();
+    core_storage_save({
+      'keys': [
+        'step-interval',
+        'step-limit',
+        'step-max',
+        'step-start',
+      ],
+    });
 
     let result = '';
     let steps = 0;
