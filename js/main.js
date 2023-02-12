@@ -42,8 +42,14 @@ function repo_init(){
       'keybinds': {
         13: {
           'todo': function(event){
-              if(document.getElementById('calculator') === document.activeElement){
+              const calculator = document.getElementById('calculator');
+
+              if(calculator === document.activeElement){
                   event.preventDefault();
+              }
+              if(event.shiftKey){
+                  calculator.value += '\n';
+                  return;
               }
 
               calculate();
