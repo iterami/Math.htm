@@ -44,10 +44,10 @@ function repo_init(){
 
               if(calculator === document.activeElement){
                   event.preventDefault();
-              }
-              if(event.shiftKey){
-                  insert('\n');
-                  return;
+                  if(event.shiftKey){
+                      insert('\n');
+                      return;
+                  }
               }
 
               calculate();
