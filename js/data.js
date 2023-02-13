@@ -135,3 +135,11 @@ function calculate_width(){
     document.getElementById('width').value = document.getElementById('height').value
       * (document.getElementById('ratio-width').value / document.getElementById('ratio-height').value);
 }
+
+function insert(text){
+    const calculator = document.getElementById('calculator');
+    const position = calculator.selectionStart;
+    calculator.value = calculator.value.substring(0, position) + text + calculator.value.substring(position, calculator.value.length);
+    calculator.selectionEnd = position + text.length;
+    calculator.focus();
+}

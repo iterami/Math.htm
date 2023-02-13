@@ -24,9 +24,7 @@ function repo_init(){
         },
         'pi': {
           'onclick': function(){
-              const calculator = document.getElementById('calculator');
-              calculator.value += 'π';
-              calculator.focus();
+              insert('π');
           },
         },
         'ratio-height': {
@@ -48,7 +46,7 @@ function repo_init(){
                   event.preventDefault();
               }
               if(event.shiftKey){
-                  calculator.value += '\n';
+                  insert('\n');
                   return;
               }
 
