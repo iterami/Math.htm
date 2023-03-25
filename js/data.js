@@ -48,6 +48,7 @@ function calculate(){
       'decimals-min': decimals,
       'number': result,
     });
+    document.title = core_repo_title + ': ' + result;
 }
 
 function calculate_height(){
