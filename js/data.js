@@ -44,11 +44,12 @@ function calculate(){
     if(result_string.includes('.')){
         decimals = result_string.split('.')[1].length;
     }
-    document.getElementById('result-formatted').textContent = core_number_format({
+    const formatted_result = core_number_format({
       'decimals-min': decimals,
       'number': result,
     });
-    document.title = core_repo_title + ': ' + result;
+    document.getElementById('result-formatted').textContent = formatted_result;
+    document.title = core_repo_title + ': ' + formatted_result;
 }
 
 function calculate_height(){
