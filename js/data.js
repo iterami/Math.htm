@@ -49,7 +49,7 @@ function calculate(){
       'number': result,
     });
     document.getElementById('result-formatted').textContent = formatted_result;
-    document.title = core_repo_title + ': ' + formatted_result;
+    document.title = formatted_result + ' - ' + core_repo_title;
 }
 
 function calculate_height(){
