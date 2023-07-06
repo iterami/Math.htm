@@ -87,7 +87,7 @@ function calculate_interest(){
         result = core_storage_data['principal'];
     }
 
-    document.getElementById('result-interest').value = core_number_format({
+    document.getElementById('result-interest').textContent = core_number_format({
       'decimals-min': core_storage_data['decimals-min'],
       'number': result,
     });
