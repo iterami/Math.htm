@@ -109,17 +109,11 @@ function calculate_percent(){
 
         const step_percent = i === 0
           ? 0
-          : core_round({
-              'number': (core_storage_data['step-interval'] / (core_storage_data['step-max'] - i + core_storage_data['step-interval'])) * 100,
-            });
+          : (core_storage_data['step-interval'] / (core_storage_data['step-max'] - i + core_storage_data['step-interval'])) * 100;
 
-        result += '<tr><td>' + core_round({
-            'number': i,
-          })
+        result += '<tr><td>' + i
           + '<td>' + step_percent + '%'
-          + '<td>' + core_round({
-            'number': (i / core_storage_data['step-max']) * 100,
-          }) + '%';
+          + '<td>' + (i / core_storage_data['step-max']) * 100 + '%';
     }
     document.getElementById('result-percent').innerHTML = result;
 }
