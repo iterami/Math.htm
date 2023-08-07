@@ -7,36 +7,27 @@ function calculate(){
       ],
     });
 
-    let to_calculate = document.getElementById('calculator').value.replace(
-      /\s/g,
-      ''
-    );
-    if(to_calculate.length === 0){
+    const element_value = document.getElementById('calculator').value;
+    if(element_value.length === 0){
         return;
     }
 
-    to_calculate = to_calculate.replace(
-      /,/g,
-      ''
-    );
-    to_calculate = to_calculate.replace(
-      /π/g,
-      'Math.PI'
-    );
-
     let result = '';
-
     try{
-        result = core_round({
-          'number': eval(to_calculate),
-        });
+        result = eval(core_replace_multiple({
+          'patterns': {
+            ',': '',
+            'e': 'Math.E',
+            'π': 'Math.PI',
+          },
+          'string': element_value,
+        }));
 
     }catch(error){
         document.getElementById('result').textContent = 'SYNTAX ERROR';
         document.getElementById('result-formatted').textContent = '';
         return;
     }
-
     document.getElementById('result').textContent = result;
 
     let decimals = 0;
@@ -163,6 +154,11 @@ function repo_init(){
               const calculator = document.getElementById('calculator');
               calculator.value = '';
               calculator.focus();
+          },
+        },
+        'euler': {
+          'onclick': function(){
+              insert('e');
           },
         },
         'height': {
