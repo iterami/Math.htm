@@ -180,7 +180,7 @@ function repo_init(){
 
               if(calculator === document.activeElement){
                   event.preventDefault();
-                  if(event.shiftKey){
+                  if(core_key_shift){
                       insert('\n');
                       return;
                   }
