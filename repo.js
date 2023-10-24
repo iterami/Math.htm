@@ -174,7 +174,7 @@ function repo_init(){
         },
       },
       'keybinds': {
-        13: {
+        'Enter': {
           'todo': function(event){
               const calculator = document.getElementById('calculator');
 
