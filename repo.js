@@ -15,7 +15,6 @@ function calculate(){
         result = eval(core_replace_multiple({
           'patterns': {
             ',': '',
-            'e': 'Math.E',
             'π': 'Math.PI',
           },
           'string': element_value,
@@ -146,7 +145,7 @@ function repo_init(){
         },
         'euler': {
           'onclick': function(){
-              insert('e');
+              insert('Math.E');
           },
         },
         'height': {
