@@ -7,9 +7,13 @@ function calculate(){
 
     const element_value = document.getElementById('calculator').value;
     if(element_value.length === 0){
+        document.title = core_repo_title;
+        document.getElementById('result').textContent = '';
+        document.getElementById('result-formatted').textContent = '';
         return;
     }
 
+    let syntax_error = false;
     let result = '';
     try{
         result = eval(core_replace_multiple({
@@ -21,23 +25,25 @@ function calculate(){
         }));
 
     }catch(error){
-        document.getElementById('result').textContent = 'SYNTAX ERROR';
-        document.getElementById('result-formatted').textContent = '';
-        return;
+        syntax_error = true;
+        result = 'SYNTAX ERROR';
     }
     document.getElementById('result').textContent = result;
 
-    let decimals = 0;
-    const result_string = result.toString();
-    if(result_string.includes('.')){
-        decimals = result_string.split('.')[1].length;
+    let formatted_result = result;
+    if(!syntax_error){
+        let decimals = 0;
+        const result_string = result.toString();
+        if(result_string.includes('.')){
+            decimals = result_string.split('.')[1].length;
+        }
+        formatted_result = core_number_format({
+          'decimals-min': decimals,
+          'number': result,
+        });
     }
-    const formatted_result = core_number_format({
-      'decimals-min': decimals,
-      'number': result,
-    });
     document.getElementById('result-formatted').textContent = formatted_result;
-    document.title = formatted_result + ' - ' + core_repo_title;
+    document.title = formatted_result + ' = ' + element_value;
 }
 
 function calculate_height(){
@@ -141,6 +147,7 @@ function repo_init(){
               const calculator = document.getElementById('calculator');
               calculator.value = '';
               calculator.focus();
+              calculate();
           },
         },
         'euler': {
