@@ -144,6 +144,10 @@ function repo_init(){
         },
         'clear': {
           'onclick': function(){
+              if(!globalThis.confirm('Clear?')){
+                  return;
+              }
+
               const calculator = document.getElementById('calculator');
               calculator.value = '';
               calculator.focus();
