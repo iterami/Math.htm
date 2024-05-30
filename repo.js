@@ -16,7 +16,7 @@ function calculate(){
     let syntax_error = false;
     let result = '';
     try{
-        result = eval(core_replace_multiple({
+        result = globalThis.eval(core_replace_multiple({
           'patterns': {
             ',': '',
             'π': 'Math.PI',
