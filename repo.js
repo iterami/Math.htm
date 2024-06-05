@@ -5,7 +5,7 @@ function calculate(){
       'calculator',
     ]);
 
-    if(core_elements['calculator'].length === 0){
+    if(core_elements['calculator'].value.length === 0){
         document.title = core_repo_title;
         core_ui_update({
           'ids': {
