@@ -5,11 +5,14 @@ function calculate(){
       'calculator',
     ]);
 
-    const element_value = document.getElementById('calculator').value;
-    if(element_value.length === 0){
+    if(core_elements['calculator'].length === 0){
         document.title = core_repo_title;
-        document.getElementById('result').textContent = '';
-        document.getElementById('result-formatted').textContent = '';
+        core_ui_update({
+          'ids': {
+            'result': '',
+            'result-formatted': '',
+          },
+        });
         return;
     }
 
@@ -21,15 +24,13 @@ function calculate(){
             ',': '',
             'π': 'Math.PI',
           },
-          'string': element_value,
+          'string': core_elements['calculator'].value,
         }));
 
     }catch(error){
         syntax_error = true;
         result = 'SYNTAX ERROR';
     }
-    document.getElementById('result').textContent = result;
-
     let formatted_result = result;
     if(!syntax_error){
         let decimals = 0;
@@ -42,13 +43,18 @@ function calculate(){
           'number': result,
         });
     }
-    document.getElementById('result-formatted').textContent = formatted_result;
-    document.title = formatted_result + ' = ' + element_value;
+    core_ui_update({
+      'ids': {
+        'result': result,
+        'result-formatted': formatted_result,
+      },
+    });
+    document.title = formatted_result + ' = ' + core_elements['calculator'].value;
 }
 
 function calculate_height(){
-    document.getElementById('height').value = document.getElementById('width').value
-      * (document.getElementById('ratio-height').value / document.getElementById('ratio-width').value);
+    core_elements['height'].value = core_elements['width'].value
+      * (core_elements['ratio-height'].value / core_elements['ratio-width'].value);
 }
 
 function calculate_interest(){
@@ -79,9 +85,13 @@ function calculate_interest(){
         result = core_storage_data['principal'];
     }
 
-    document.getElementById('result-interest').textContent = core_number_format({
-      'decimals-min': core_storage_data['decimals-min'],
-      'number': result,
+    core_ui_update({
+      'ids': {
+        'result-interest': core_number_format({
+          'decimals-min': core_storage_data['decimals-min'],
+          'number': result,
+        }),
+      },
     });
 }
 
@@ -114,20 +124,23 @@ function calculate_percent(){
           + '<td>' + step_percent + '%'
           + '<td>' + (i / core_storage_data['step-max']) * 100 + '%';
     }
-    document.getElementById('result-percent').innerHTML = result;
+    core_ui_update({
+      'ids': {
+        'result-percent': result,
+      },
+    });
 }
 
 function calculate_width(){
-    document.getElementById('width').value = document.getElementById('height').value
-      * (document.getElementById('ratio-width').value / document.getElementById('ratio-height').value);
+    core_elements['width'].value = core_elements['height'].value
+      * (core_elements['ratio-width'].value / core_elements['ratio-height'].value);
 }
 
 function insert(text){
-    const calculator = document.getElementById('calculator');
-    const position = calculator.selectionStart;
-    calculator.value = calculator.value.substring(0, position) + text + calculator.value.substring(position, calculator.value.length);
-    calculator.selectionEnd = position + text.length;
-    calculator.focus();
+    const position = core_elements['calculator'].selectionStart;
+    core_elements['calculator'].value = core_elements['calculator'].value.substring(0, position) + text + core_elements['calculator'].value.substring(position, core_elements['calculator'].value.length);
+    core_elements['calculator'].selectionEnd = position + text.length;
+    core_elements['calculator'].focus();
 }
 
 function repo_init(){
@@ -148,9 +161,8 @@ function repo_init(){
                   return;
               }
 
-              const calculator = document.getElementById('calculator');
-              calculator.value = '';
-              calculator.focus();
+              core_elements['calculator'].value = '';
+              core_elements['calculator'].focus();
               calculate();
           },
         },
@@ -180,9 +192,7 @@ function repo_init(){
       'keybinds': {
         'Enter': {
           'todo': function(event){
-              const calculator = document.getElementById('calculator');
-
-              if(calculator === document.activeElement){
+              if(core_elements['calculator'] === document.activeElement){
                   event.preventDefault();
                   if(core_key_shift){
                       insert('\n');
@@ -207,6 +217,12 @@ function repo_init(){
         'time': 0,
       },
       'title': 'Math.htm',
+      'ui-elements': [
+        'height',
+        'ratio-height',
+        'ratio-width',
+        'width',
+      ],
     });
 
     core_storage_update();
