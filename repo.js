@@ -97,20 +97,20 @@ function calculate_interest(){
 
 function calculate_percent(){
     core_storage_save([
+      'step-end',
       'step-interval',
       'step-limit',
-      'step-max',
       'step-start',
     ]);
 
     let result = '';
     let steps = 0;
-    for(let i = core_storage_data['step-start']; i <= core_storage_data['step-max']; i+= core_storage_data['step-interval']){
+    for(let i = core_storage_data['step-start']; i <= core_storage_data['step-end']; i+= core_storage_data['step-interval']){
         if(core_storage_data['step-limit'] > 0){
             steps++;
 
             if(steps > core_storage_data['step-limit']){
-                result += '<tr><td colspan=3>Step Limit Reached';
+                result += '<tr><td colspan=4>Step Limit Reached';
 
                 break;
             }
@@ -118,17 +118,14 @@ function calculate_percent(){
 
         const step_percent = i === 0
           ? 0
-          : (core_storage_data['step-interval'] / (core_storage_data['step-max'] - i + core_storage_data['step-interval'])) * 100;
+          : (core_storage_data['step-interval'] / (core_storage_data['step-end'] - i + core_storage_data['step-interval'])) * 100;
 
-        result += '<tr><td>' + i
+        result += '<tr><td>' + (steps - 1)
+          + '<td>' + i
           + '<td>' + step_percent + '%'
-          + '<td>' + (i / core_storage_data['step-max']) * 100 + '%';
+          + '<td>' + (i / core_storage_data['step-end']) * 100 + '%';
     }
-    core_ui_update({
-      'ids': {
-        'result-percent': result,
-      },
-    });
+    core_elements['result-percent'].innerHTML = result;
 }
 
 function calculate_width(){
@@ -210,9 +207,9 @@ function repo_init(){
         'decimals-min': 2,
         'interest': 0,
         'principal': 0,
+        'step-end': 10,
         'step-interval': 1,
         'step-limit': 100,
-        'step-max': 10,
         'step-start': 0,
         'time': 0,
       },
@@ -221,6 +218,7 @@ function repo_init(){
         'height',
         'ratio-height',
         'ratio-width',
+        'result-percent',
         'width',
       ],
     });
