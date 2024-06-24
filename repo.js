@@ -53,8 +53,10 @@ function calculate(){
 }
 
 function calculate_height(){
-    core_elements['height'].value = core_elements['width'].value
-      * (core_elements['ratio-height'].value / core_elements['ratio-width'].value);
+    core_elements['height'].value = core_round({
+      'number': core_elements['width'].value
+        * (core_elements['ratio-height'].value / core_elements['ratio-width'].value),
+    });
 }
 
 function calculate_interest(){
@@ -131,8 +133,10 @@ function calculate_percent(){
 }
 
 function calculate_width(){
-    core_elements['width'].value = core_elements['height'].value
-      * (core_elements['ratio-width'].value / core_elements['ratio-height'].value);
+    core_elements['width'].value = core_round({
+      'number': core_elements['height'].value
+        * (core_elements['ratio-width'].value / core_elements['ratio-height'].value),
+    });
 }
 
 function insert(text){
@@ -224,6 +228,11 @@ function repo_init(){
         'width',
       ],
     });
+
+    core_elements['height'].value = globalThis.innerHeight;
+    core_elements['width'].value = globalThis.innerWidth;
+    core_elements['ratio-height'].value = 1;
+    core_elements['ratio-width'].value = globalThis.innerWidth / globalThis.innerHeight;
 
     core_storage_update();
     calculate();
