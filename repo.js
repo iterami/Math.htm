@@ -106,14 +106,12 @@ function calculate_percent(){
     let result = '';
     let steps = 0;
     for(let i = core_storage_data['step-start']; i <= core_storage_data['step-end']; i+= core_storage_data['step-interval']){
-        if(core_storage_data['step-limit'] > 0){
-            steps++;
+        steps++;
 
-            if(steps > core_storage_data['step-limit']){
-                result += '<tr><td colspan=4>Step Limit Reached';
-
-                break;
-            }
+        if(core_storage_data['step-limit'] > 0
+          && steps > core_storage_data['step-limit']){
+            result += '<tr><td colspan=4>Step Limit Reached';
+            break;
         }
 
         const step_percent = i === 0
