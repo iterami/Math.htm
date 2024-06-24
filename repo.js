@@ -120,8 +120,12 @@ function calculate_percent(){
 
         result += '<tr><td>' + (steps - 1)
           + '<td>' + i
-          + '<td>' + step_percent + '%'
-          + '<td>' + (i / core_storage_data['step-end']) * 100 + '%';
+          + '<td>' + core_round({
+              'number': step_percent,
+            }) + '%'
+          + '<td>' + core_round({
+              'number': (i / core_storage_data['step-end']) * 100,
+            }) + '%';
     }
     core_elements['result-percent'].innerHTML = result;
 }
