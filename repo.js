@@ -31,13 +31,12 @@ function calculate(){
         syntax_error = true;
         result = 'SYNTAX ERROR';
     }
-    let formatted_result = result;
-    if(!syntax_error){
-        formatted_result = core_number_format({
+    const formatted_result = syntax_error
+      ? result
+      : core_number_format({
           'decimals-min': 0,
           'number': result,
         });
-    }
     core_ui_update({
       'ids': {
         'result': result,
