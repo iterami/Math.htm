@@ -33,13 +33,8 @@ function calculate(){
     }
     let formatted_result = result;
     if(!syntax_error){
-        let decimals = 0;
-        const result_string = result.toString();
-        if(result_string.includes('.')){
-            decimals = result_string.split('.')[1].length;
-        }
         formatted_result = core_number_format({
-          'decimals-min': decimals,
+          'decimals-min': 0,
           'number': result,
         });
     }
