@@ -19,7 +19,7 @@ function calculate(){
     let syntax_error = false;
     let result = '';
     try{
-        result = globalThis.eval(core_replace_multiple({
+        result = globalThis.eval(core_replace({
           'patterns': {
             ',': '',
             'π': 'Math.PI',
