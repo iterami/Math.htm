@@ -5,12 +5,12 @@ function calculate(){
       'calculator',
     ]);
 
-    if(core_elements['calculator'].value.length === 0){
+    if(core_elements.calculator.value.length === 0){
         document.title = core_repo_title;
         core_ui_update({
           'ids': {
             'result': '',
-            'result-formatted': '',
+            'result_formatted': '',
           },
         });
         return;
@@ -24,7 +24,7 @@ function calculate(){
             ',': '',
             'π': 'Math.PI',
           },
-          'string': core_elements['calculator'].value,
+          'string': core_elements.calculator.value,
         }));
 
     }catch(error){
@@ -34,57 +34,57 @@ function calculate(){
     const formatted_result = syntax_error
       ? result
       : core_number_format({
-          'decimals-min': 0,
+          'decimals': 0,
           'number': result,
         });
     core_ui_update({
       'ids': {
         'result': result,
-        'result-formatted': formatted_result,
+        'result_formatted': formatted_result,
       },
     });
-    document.title = formatted_result + ' = ' + core_elements['calculator'].value;
+    document.title = formatted_result + ' = ' + core_elements.calculator.value;
 }
 
 function calculate_height(){
-    core_elements['height'].value = core_round({
-      'number': core_elements['width'].value
-        * (core_elements['ratio-height'].value / core_elements['ratio-width'].value),
+    core_elements.height.value = core_round({
+      'number': core_elements.width.value
+        * (core_elements.ratio_height.value / core_elements.ratio_width.value),
     });
 }
 
 function calculate_interest(){
     core_storage_save([
       'compound',
-      'decimals-min',
+      'decimals',
       'interest',
       'principal',
       'time',
     ]);
 
-    let loop_counter = core_storage_data['time'] - 1;
+    let loop_counter = core_storage_data.time - 1;
     let result = 0;
     if(loop_counter >= 0){
-        const interest = core_storage_data['interest'] / 100;
-        let principal = core_storage_data['principal'];
+        const interest = core_storage_data.interest / 100;
+        let principal = core_storage_data.principal;
 
         do{
             result += principal * interest;
 
-            if(core_storage_data['compound']){
+            if(core_storage_data.compound){
                 principal += principal * interest;
             }
         }while(loop_counter--);
         result += principal;
 
     }else{
-        result = core_storage_data['principal'];
+        result = core_storage_data.principal;
     }
 
     core_ui_update({
       'ids': {
-        'result-interest': core_number_format({
-          'decimals-min': core_storage_data['decimals-min'],
+        'result_interest': core_number_format({
+          'decimals': core_storage_data.decimals,
           'number': result,
         }),
       },
@@ -93,17 +93,17 @@ function calculate_interest(){
 
 function calculate_percent(){
     core_storage_save([
-      'step-end',
-      'step-interval',
-      'step-limit',
-      'step-start',
+      'step_end',
+      'step_interval',
+      'step_limit',
+      'step_start',
     ]);
 
     let result = '';
     let steps = 0;
-    for(let i = core_storage_data['step-start']; i <= core_storage_data['step-end']; i+= core_storage_data['step-interval']){
-        if(core_storage_data['step-limit'] > 0
-          && steps > core_storage_data['step-limit']){
+    for(let i = core_storage_data.step_start; i <= core_storage_data.step_end; i+= core_storage_data.step_interval){
+        if(core_storage_data.step_limit > 0
+          && steps > core_storage_data.step_limit){
             result += '<tr><td colspan=4>Step Limit Reached';
             break;
         }
@@ -111,7 +111,7 @@ function calculate_percent(){
 
         const step_percent = i === 0
           ? 0
-          : (core_storage_data['step-interval'] / (core_storage_data['step-end'] - i + core_storage_data['step-interval'])) * 100;
+          : (core_storage_data.step_interval / (core_storage_data.step_end - i + core_storage_data.step_interval)) * 100;
 
         result += '<tr><td>' + (steps - 1)
           + '<td>' + i
@@ -119,24 +119,24 @@ function calculate_percent(){
               'number': step_percent,
             }) + '%'
           + '<td>' + core_round({
-              'number': (i / core_storage_data['step-end']) * 100,
+              'number': (i / core_storage_data.step_end) * 100,
             }) + '%';
     }
-    core_elements['result-percent'].innerHTML = result;
+    core_elements.result_percent.innerHTML = result;
 }
 
 function calculate_width(){
-    core_elements['width'].value = core_round({
-      'number': core_elements['height'].value
-        * (core_elements['ratio-width'].value / core_elements['ratio-height'].value),
+    core_elements.width.value = core_round({
+      'number': core_elements.height.value
+        * (core_elements.ratio_width.value / core_elements.ratio_height.value),
     });
 }
 
 function insert(text){
-    const position = core_elements['calculator'].selectionStart;
-    core_elements['calculator'].value = core_elements['calculator'].value.substring(0, position) + text + core_elements['calculator'].value.substring(position, core_elements['calculator'].value.length);
-    core_elements['calculator'].selectionEnd = position + text.length;
-    core_elements['calculator'].focus();
+    const position = core_elements.calculator.selectionStart;
+    core_elements.calculator.value = core_elements.calculator.value.substring(0, position) + text + core_elements.calculator.value.substring(position, core_elements.calculator.value.length);
+    core_elements.calculator.selectionEnd = position + text.length;
+    core_elements.calculator.focus();
 }
 
 function repo_init(){
@@ -157,8 +157,8 @@ function repo_init(){
                   return;
               }
 
-              core_elements['calculator'].value = '';
-              core_elements['calculator'].focus();
+              core_elements.calculator.value = '';
+              core_elements.calculator.focus();
               calculate();
           },
         },
@@ -175,10 +175,10 @@ function repo_init(){
               insert('π');
           },
         },
-        'ratio-height': {
+        'ratio_height': {
           'oninput': calculate_width,
         },
-        'ratio-width': {
+        'ratio_width': {
           'oninput': calculate_height,
         },
         'width': {
@@ -188,7 +188,7 @@ function repo_init(){
       'keybinds': {
         'Enter': {
           'todo': function(event){
-              if(core_elements['calculator'] === document.activeElement){
+              if(core_elements.calculator === document.activeElement){
                   event.preventDefault();
                   if(core_key_shift){
                       insert('\n');
@@ -203,29 +203,29 @@ function repo_init(){
       'storage': {
         'calculator': '',
         'compound': false,
-        'decimals-min': 2,
+        'decimals': 2,
         'interest': 0,
         'principal': 0,
-        'step-end': 10,
-        'step-interval': 1,
-        'step-limit': 100,
-        'step-start': 0,
+        'step_end': 10,
+        'step_interval': 1,
+        'step_limit': 100,
+        'step_start': 0,
         'time': 0,
       },
       'title': 'Math.htm',
       'ui-elements': [
         'height',
-        'ratio-height',
-        'ratio-width',
-        'result-percent',
+        'ratio_height',
+        'ratio_width',
+        'result_percent',
         'width',
       ],
     });
 
-    core_elements['height'].value = globalThis.innerHeight;
-    core_elements['width'].value = globalThis.innerWidth;
-    core_elements['ratio-height'].value = 1;
-    core_elements['ratio-width'].value = globalThis.innerWidth / globalThis.innerHeight;
+    core_elements.height.value = globalThis.innerHeight;
+    core_elements.width.value = globalThis.innerWidth;
+    core_elements.ratio_height.value = 1;
+    core_elements.ratio_width.value = globalThis.innerWidth / globalThis.innerHeight;
 
     core_storage_update();
     calculate();
