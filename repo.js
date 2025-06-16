@@ -27,7 +27,7 @@ function calculate(){
           'string': core_elements.calculator.value,
         }));
 
-    }catch(error){
+    }catch{
         syntax_error = true;
         result = 'SYNTAX ERROR';
     }
