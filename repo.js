@@ -213,7 +213,7 @@ function repo_init(){
         'time': 0,
       },
       'title': 'Math.htm',
-      'ui-elements': [
+      'ui_elements': [
         'height',
         'ratio_height',
         'ratio_width',
