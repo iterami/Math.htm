@@ -34,7 +34,7 @@ function calculate(){
     const formatted_result = syntax_error
       ? result
       : core_number_format({
-          'decimals': 0,
+          'decimals_min': 0,
           'number': result,
         });
     core_ui_update({
@@ -84,7 +84,7 @@ function calculate_interest(){
     core_ui_update({
       'ids': {
         'result_interest': core_number_format({
-          'decimals': core_storage_data.decimals,
+          'decimals_min': core_storage_data.decimals,
           'number': result,
         }),
       },
