@@ -34,7 +34,6 @@ function calculate(){
     const formatted_result = syntax_error
       ? result
       : core_number_format({
-          'decimals_min': 0,
           'number': result,
         });
     core_ui_update({
