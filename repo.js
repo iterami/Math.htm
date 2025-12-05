@@ -21,6 +21,7 @@ function calculate(){
     try{
         result = globalThis.eval(core_replace({
           'patterns': {
+            'Result': core_elements.result.textContent,
             ',': '',
             'π': 'Math.PI',
           },
@@ -179,6 +180,11 @@ function repo_init(){
         },
         'ratio_width': {
           'oninput': calculate_height,
+        },
+        'result_use': {
+          'onclick': function(){
+              insert('Result');
+          },
         },
         'width': {
           'oninput': calculate_height,
