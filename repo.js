@@ -16,7 +16,6 @@ function calculate(){
         return;
     }
 
-    let syntax_error = false;
     let result = '';
     try{
         result = globalThis.eval(core_replace({
@@ -28,15 +27,12 @@ function calculate(){
           'string': core_elements.calculator.value,
         }));
 
-    }catch{
-        syntax_error = true;
-        result = 'SYNTAX ERROR';
+    }catch(error){
+        result = error;
     }
-    const formatted_result = syntax_error
-      ? result
-      : core_number_format({
-          'number': result,
-        });
+    const formatted_result = core_number_format({
+      'number': result,
+    });
     core_ui_update({
       'ids': {
         'result': result,
@@ -222,6 +218,7 @@ function repo_init(){
         'height',
         'ratio_height',
         'ratio_width',
+        'result',
         'result_percent',
         'width',
       ],
