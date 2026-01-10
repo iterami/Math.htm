@@ -188,7 +188,7 @@ function repo_init(){
       },
       'keybinds': {
         'Enter': {
-          'todo': function(event){
+          'down': function(event){
               if(core_elements.calculator === document.activeElement){
                   event.preventDefault();
                   if(core_key_shift){
