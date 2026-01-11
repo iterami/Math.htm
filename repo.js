@@ -1,9 +1,12 @@
 'use strict';
 
 function calculate(){
-    core_storage_save([
-      'calculator',
-    ]);
+    core_storage_save({
+      'keys': [
+        'calculator',
+      ],
+      'rebind': false,
+    });
 
     if(core_elements.calculator.value.length === 0){
         document.title = core_repo_title;
@@ -50,13 +53,16 @@ function calculate_height(){
 }
 
 function calculate_interest(){
-    core_storage_save([
-      'compound',
-      'decimals',
-      'interest',
-      'principal',
-      'time',
-    ]);
+    core_storage_save({
+      'keys': [
+        'compound',
+        'decimals',
+        'interest',
+        'principal',
+        'time',
+      ],
+      'rebind': false,
+    });
 
     let loop_counter = core_storage_data.time - 1;
     let result = 0;
@@ -88,12 +94,15 @@ function calculate_interest(){
 }
 
 function calculate_percent(){
-    core_storage_save([
-      'step_end',
-      'step_interval',
-      'step_limit',
-      'step_start',
-    ]);
+    core_storage_save({
+      'keys': [
+        'step_end',
+        'step_interval',
+        'step_limit',
+        'step_start',
+      ],
+      'rebind': false,
+    });
 
     let result = '';
     let steps = 0;
