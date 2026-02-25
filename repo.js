@@ -64,23 +64,16 @@ function calculate_interest(){
       'rebind': false,
     });
 
-    let loop_counter = core_storage_data.time - 1;
-    let result = 0;
-    if(loop_counter >= 0){
-        const interest = core_storage_data.interest / 100;
-        let principal = core_storage_data.principal;
+    const interest = core_storage_data.interest / 100;
+    let result = core_storage_data.principal;
+    let principal = core_storage_data.principal;
 
-        do{
-            result += principal * interest;
+    for(let i = core_storage_data.time; i > 0; i--){
+        result += principal * interest;
 
-            if(core_storage_data.compound){
-                principal += principal * interest;
-            }
-        }while(loop_counter--);
-        result += principal;
-
-    }else{
-        result = core_storage_data.principal;
+        if(core_storage_data.compound){
+            principal += principal * interest;
+        }
     }
 
     core_ui_update({
