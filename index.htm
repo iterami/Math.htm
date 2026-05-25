@@ -17,14 +17,11 @@
     <td>Interest
     <td><input id=interest step=any type=number>
   <tr>
-    <td><label for=compound>Compound</label>
-    <td><input id=compound type=checkbox>
-  <tr>
     <td>Time
     <td><input id=time step=any type=number>
   <tr>
-    <td>Minimum Decimals
-    <td><input id=decimals min=0 step=1 type=number>
+    <td>Decimals <input class=mini id=decimals min=0 step=1 type=number>
+    <td><label><input id=compound type=checkbox>Compound</label>
   <tr>
     <td><button id=calculate-interest type=button>Calculate Interest</button>
     <td id=result_interest>
@@ -48,17 +45,17 @@
     <td>Percentages
     <td><button id=calculate-percent type=button>Calculate Percent</button>
   <tr>
-    <td>Step End
+    <td>Start
+    <td><input id=step_start step=any type=number>
+  <tr>
+    <td>End
     <td><input id=step_end step=any type=number>
   <tr>
-    <td>Step Interval
+    <td>Interval
     <td><input id=step_interval step=any type=number>
   <tr>
-    <td>Step Limit
+    <td>Limit
     <td><input id=step_limit step=any type=number>
-  <tr>
-    <td>Step Start
-    <td><input id=step_start step=any type=number>
 </table>
 <table>
   <thead>
