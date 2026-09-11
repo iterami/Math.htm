@@ -2,9 +2,7 @@
 
 function calculate(){
     core_storage_save({
-      'keys': [
-        'calculator',
-      ],
+      'keys': ['calculator'],
       'rebind': false,
     });
 
@@ -47,8 +45,7 @@ function calculate(){
 
 function calculate_height(){
     core_elements.height.value = core_round({
-      'number': core_elements.width.value
-        * (core_elements.ratio_height.value / core_elements.ratio_width.value),
+      'number': core_elements.width.value * (core_elements.ratio_height.value / core_elements.ratio_width.value),
     });
 }
 
@@ -125,8 +122,7 @@ function calculate_percent(){
 
 function calculate_width(){
     core_elements.width.value = core_round({
-      'number': core_elements.height.value
-        * (core_elements.ratio_width.value / core_elements.ratio_height.value),
+      'number': core_elements.height.value * (core_elements.ratio_width.value / core_elements.ratio_height.value),
     });
 }
 
